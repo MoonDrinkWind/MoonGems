@@ -46,7 +46,7 @@ public class ELis implements Listener {
             if(event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getPlayer().isSneaking()) {
                 if(event.getClickedBlock().getType() == Material.ANVIL) {
                     event.setCancelled(true);
-                    EGems.ogui(event.getPlayer());
+                    EGems.openGui(event.getPlayer());
                 }
             }
         }
