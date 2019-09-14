@@ -29,6 +29,3 @@ hs_err_pid*
 
 # maven
 /src/test
-
-# other
-*.iml
