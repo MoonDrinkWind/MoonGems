@@ -2,7 +2,7 @@ package moon.atbar.egems;
 
 import java.util.List;
 
-public class GemsConfig {
+public class GemConfig {
 
     List<Integer> can;
     String Enchant;

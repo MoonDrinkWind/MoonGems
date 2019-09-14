@@ -1,5 +1,7 @@
 package moon.atbar.egems;
 
+import moon.atbar.egems.utils.GemTools;
+import moon.atbar.egems.utils.StringTools;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,80 +13,78 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.inventory.*;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import java.util.List;
 
 public class ELis implements Listener {
 
-    private GemsConfig gemsConfig;
+    private GemConfig gemConfig;
 
     public ELis(){
-        gemsConfig = new GemsConfig();
+        gemConfig = new GemConfig();
     }
 
     @EventHandler
-    public void onEDeath(EntityDeathEvent e) {
-        Entity entity = e.getEntity();
-        EntityType et = entity.getType();
-        Location l = entity.getLocation();
-        ItemStack gem = EGems.getInstance().spawnGems();
-        ItemMeta im = gem.getItemMeta();
-        if(EGems.getInstance().isr(EGems.getInstance().dropmap.get(et.name()).get(EGems.getInstance().addcolor(im.getDisplayName())))) {
-            l.getWorld().dropItemNaturally(l,gem);
+    public void onEDeath(EntityDeathEvent event) {
+        Entity entity = event.getEntity();
+        EntityType entityType = entity.getType();
+        Location location = entity.getLocation();
+        ItemStack gem = GemTools.spawnGem();
+        ItemMeta itemMeta = gem.getItemMeta();
+        if(EGems.getInstance().isr(EGems.getInstance().dropmap.get(entityType.name()).get(StringTools.addColor(itemMeta.getDisplayName())))) {
+            location.getWorld().dropItemNaturally(location, gem);
         }
     }
 
     @EventHandler
-    public void onIt(PlayerInteractEvent e){
-        if((e.getPlayer().getGameMode() != GameMode.CREATIVE)) {
-            if(e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getPlayer().isSneaking()) {
-                if(e.getClickedBlock().getType() == Material.ANVIL) {
-                    e.setCancelled(true);
-                    EGems.ogui(e.getPlayer());
+    public void onIt(PlayerInteractEvent event){
+        if((event.getPlayer().getGameMode() != GameMode.CREATIVE)) {
+            if(event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getPlayer().isSneaking()) {
+                if(event.getClickedBlock().getType() == Material.ANVIL) {
+                    event.setCancelled(true);
+                    EGems.ogui(event.getPlayer());
                 }
             }
         }
     }
 
     @EventHandler
-    public void onic(InventoryClickEvent e) {
-        Player p = (Player)e.getWhoClicked();
-        if(e.getInventory().getTitle().equalsIgnoreCase(EGems.addcolor(EGems.getInstance().messagef.getString("界面标题")))) {
+    public void onic(InventoryClickEvent event) {
+        Player player = (Player)event.getWhoClicked();
+        if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(EGems.getInstance().messagef.getString("界面标题")))) {
             try {
-                if(e.getCurrentItem().equals(EGems.win) || e.getCurrentItem().equals(EGems.cli)) {
-                    e.setCancelled(true);
+                if(event.getCurrentItem().equals(EGems.win) || event.getCurrentItem().equals(EGems.cli)) {
+                    event.setCancelled(true);
                 }
             } catch (Exception ignored) {
 
             }
-            if(e.getInventory().getItem(11) != null && e.getInventory().getItem(12) != null) {
-                ItemStack w = e.getInventory().getItem(11);
-                ItemMeta wm = w.getItemMeta();
-                ItemStack b = e.getInventory().getItem(12);
-                ItemMeta bm = b.getItemMeta();
-                if(e.getSlot() == 13) {
-                    if(!(wm.hasEnchants()) && b.getTypeId() == 263 && b.getItemMeta().hasEnchants() && b.getItemMeta().hasDisplayName() && EGems.getInstance().gemsconfigmap.get(EGems.addcolor(bm.getDisplayName())).getCan().contains(w.getTypeId())){
-                        if(EGems.getInstance().isr(EGems.getInstance().gemsconfigmap.get(EGems.addcolor(bm.getDisplayName())).getSuccessrate())) {
-                            ItemStack g = e.getInventory().getItem(11);
-                            ItemStack bb = e.getInventory().getItem(12);
-                            for (Enchantment ment : bb.getEnchantments().keySet()) {
-                                g.addUnsafeEnchantment(ment, bb.getEnchantments().get(ment));
+            if(event.getInventory().getItem(11) != null && event.getInventory().getItem(12) != null) {
+                ItemStack item_11 = event.getInventory().getItem(11);
+                ItemMeta item_11_meta = item_11.getItemMeta();
+                ItemStack item_12 = event.getInventory().getItem(12);
+                ItemMeta item_12_meta = item_12.getItemMeta();
+                if(event.getSlot() == 13) {
+                    if(!(item_11_meta.hasEnchants()) && item_12.getTypeId() == 263 && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCan().contains(item_11.getTypeId())){
+                        if(EGems.getInstance().isr(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessrate())) {
+                            for (Enchantment enchantment : item_12.getEnchantments().keySet()) {
+                                item_11.addUnsafeEnchantment(enchantment, item_12.getEnchantments().get(enchantment));
                             }
-                            e.getInventory().setItem(14,g);
-                            if(b.getAmount() > 0) {
-                                b.setAmount(b.getAmount() - 1);
+                            event.getInventory().setItem(14,item_11);
+                            if(item_12.getAmount() > 0) {
+                                item_12.setAmount(item_12.getAmount() - 1);
                             }
-                            e.getInventory().getItem(11).setAmount(0);
-                            e.getWhoClicked().sendMessage(EGems.addcolor(EGems.getInstance().messagef.getString("成功镶嵌")));
+                            event.getInventory().getItem(11).setAmount(0);
+                            event.getWhoClicked().sendMessage(StringTools.addColor(EGems.getInstance().messagef.getString("成功镶嵌")));
                         } else {
-                            e.getWhoClicked().sendMessage(EGems.addcolor(EGems.getInstance().messagef.getString("失败镶嵌")));
+                            event.getWhoClicked().sendMessage(StringTools.addColor(EGems.getInstance().messagef.getString("失败镶嵌")));
                         }
                     } else {
-                        e.getWhoClicked().closeInventory();
-                        e.getWhoClicked().sendMessage(EGems.addcolor("&7&l[&f&lMoonEGems&7&l] &f请放置正确的物品!"));
+                        event.getWhoClicked().closeInventory();
+                        event.getWhoClicked().sendMessage(StringTools.addColor("&7&l[&f&lMoonEGems&7&l] &f请放置正确的物品!"));
                     }
                 }
             }
@@ -92,15 +92,15 @@ public class ELis implements Listener {
     }
 
     @EventHandler
-    public void onic(InventoryCloseEvent e) {
-        if(e.getInventory().getTitle().equalsIgnoreCase(EGems.addcolor(EGems.addcolor(EGems.getInstance().messagef.getString("界面标题"))))) {
-            if(e.getInventory().getItem(11) != null){
-                e.getPlayer().getInventory().addItem(e.getInventory().getItem(11));
-            } else if(e.getInventory().getItem(12) != null) {
-                e.getPlayer().getInventory().addItem(e.getInventory().getItem(12));
-            } else if(e.getInventory().getItem(11) != null && e.getInventory().getItem(12) != null) {
-                e.getPlayer().getInventory().addItem(e.getInventory().getItem(11));
-                e.getPlayer().getInventory().addItem(e.getInventory().getItem(12));
+    public void onClose(InventoryCloseEvent event) {
+        if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(StringTools.addColor(EGems.getInstance().messagef.getString("界面标题"))))) {
+            if(event.getInventory().getItem(11) != null){
+                event.getPlayer().getInventory().addItem(event.getInventory().getItem(11));
+            } else if(event.getInventory().getItem(12) != null) {
+                event.getPlayer().getInventory().addItem(event.getInventory().getItem(12));
+            } else if(event.getInventory().getItem(11) != null && event.getInventory().getItem(12) != null) {
+                event.getPlayer().getInventory().addItem(event.getInventory().getItem(11));
+                event.getPlayer().getInventory().addItem(event.getInventory().getItem(12));
             }
         }
     }
