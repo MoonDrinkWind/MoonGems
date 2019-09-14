@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class GemTools {
     public static HashMap<String, GemConfig> gemConfig = new HashMap<>();
+    public static HashMap<String,HashMap<String,Integer>> drop = new HashMap<>();
     public static List<String> gemList = new ArrayList<>();
 
     public static ItemStack spawnGem() {

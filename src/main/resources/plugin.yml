@@ -4,3 +4,7 @@ version: 1.0.0
 author: [AtBar, MoonDrinkWind]
 commands:
   MGems:
+    usage: "§f/mgems gui &7- &e打开锻造Gui\n
+    &f/mgems gemlist &7- &e列出宝石列表\n
+    &f/mgems add <p> <a> <g> &7- &e给予宝石\n
+    &f/mgems reload &7- &e重载配置"

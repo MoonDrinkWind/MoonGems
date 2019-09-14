@@ -1,5 +1,6 @@
 package moon.atbar.egems;
 
+import moon.atbar.egems.utils.DataLoader;
 import moon.atbar.egems.utils.GemTools;
 import moon.atbar.egems.utils.StringTools;
 import org.bukkit.GameMode;
@@ -34,7 +35,7 @@ public class ELis implements Listener {
         Location location = entity.getLocation();
         ItemStack gem = GemTools.spawnGem();
         ItemMeta itemMeta = gem.getItemMeta();
-        if(EGems.getInstance().isr(EGems.getInstance().dropmap.get(entityType.name()).get(StringTools.addColor(itemMeta.getDisplayName())))) {
+        if(EGems.getInstance().isr(GemTools.drop.get(entityType.name()).get(StringTools.addColor(itemMeta.getDisplayName())))) {
             location.getWorld().dropItemNaturally(location, gem);
         }
     }
@@ -54,7 +55,7 @@ public class ELis implements Listener {
     @EventHandler
     public void onic(InventoryClickEvent event) {
         Player player = (Player)event.getWhoClicked();
-        if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(EGems.getInstance().messagef.getString("界面标题")))) {
+        if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(DataLoader.messageConfiguration.getString("界面标题")))) {
             try {
                 if(event.getCurrentItem().equals(EGems.win) || event.getCurrentItem().equals(EGems.cli)) {
                     event.setCancelled(true);
@@ -78,9 +79,9 @@ public class ELis implements Listener {
                                 item_12.setAmount(item_12.getAmount() - 1);
                             }
                             event.getInventory().getItem(11).setAmount(0);
-                            event.getWhoClicked().sendMessage(StringTools.addColor(EGems.getInstance().messagef.getString("成功镶嵌")));
+                            event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("成功镶嵌")));
                         } else {
-                            event.getWhoClicked().sendMessage(StringTools.addColor(EGems.getInstance().messagef.getString("失败镶嵌")));
+                            event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("失败镶嵌")));
                         }
                     } else {
                         event.getWhoClicked().closeInventory();
@@ -93,7 +94,7 @@ public class ELis implements Listener {
 
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
-        if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(StringTools.addColor(EGems.getInstance().messagef.getString("界面标题"))))) {
+        if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(StringTools.addColor(DataLoader.messageConfiguration.getString("界面标题"))))) {
             if(event.getInventory().getItem(11) != null){
                 event.getPlayer().getInventory().addItem(event.getInventory().getItem(11));
             } else if(event.getInventory().getItem(12) != null) {
