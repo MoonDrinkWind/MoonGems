@@ -53,7 +53,7 @@ public class ELis implements Listener {
     }
 
     @EventHandler
-    public void onic(InventoryClickEvent event) {
+    public void onClick(InventoryClickEvent event) {
         Player player = (Player)event.getWhoClicked();
         if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(DataLoader.messageConfiguration.getString("界面标题")))) {
             try {

@@ -1,6 +1,7 @@
 package moon.atbar.egems.commands;
 
 import moon.atbar.egems.EGems;
+import moon.atbar.egems.utils.DataLoader;
 import moon.atbar.egems.utils.GemTools;
 import moon.atbar.egems.utils.StringTools;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public class MGems implements CommandExecutor {
                 GemTools.gemConfig.clear();
                 plugin.load();
                 GemTools.drop.clear();
+                DataLoader.loadDrop();
                 sender.sendMessage(StringTools.addColor("&c成功重载配置"));
                 return true;
             }

@@ -17,34 +17,7 @@ public class DataLoader {
     public static YamlConfiguration dropConfiguration;
     public static YamlConfiguration messageConfiguration;
     static{
-        File f = new File(plugin.getDataFolder(),"drop.yml");
-        if (!f.exists()) {
-            try {
-                f.createNewFile();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        dropConfiguration = YamlConfiguration.loadConfiguration(f);
-        HashMap<String,Integer> h = new HashMap<>();
-        Label_E :
-        for (EntityType entityType : EntityType.values()) {
-            if(entityType.isAlive()) {
-                Label_G :
-                for (String d : plugin.getConfig().getKeys(false)) {
-                    String path = entityType.name() + "." + StringTools.addColor(d);
-                    h.put(StringTools.addColor(d) , dropConfiguration.getInt(path));
-                    GemTools.drop.put(entityType.name(), h);
-                    dropConfiguration.set(path, GemTools.drop.get(entityType.name()).get(StringTools.addColor(d)));
-                    try{
-                        dropConfiguration.save(f);
-                    }catch (IOException ex){
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        }
+        loadDrop();
     }
     static{
         File file = new File(plugin.getDataFolder(),"message.yml");
@@ -79,6 +52,37 @@ public class DataLoader {
                 messageConfiguration.save(file);
             }catch (IOException ex){
                 ex.printStackTrace();
+            }
+        }
+    }
+
+    public static void loadDrop(){
+        File f = new File(plugin.getDataFolder(),"drop.yml");
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        dropConfiguration = YamlConfiguration.loadConfiguration(f);
+        HashMap<String,Integer> h = new HashMap<>();
+        Label_E :
+        for (EntityType entityType : EntityType.values()) {
+            if(entityType.isAlive()) {
+                Label_G :
+                for (String d : plugin.getConfig().getKeys(false)) {
+                    String path = entityType.name() + "." + StringTools.addColor(d);
+                    h.put(StringTools.addColor(d) , dropConfiguration.getInt(path));
+                    GemTools.drop.put(entityType.name(), h);
+                    dropConfiguration.set(path, GemTools.drop.get(entityType.name()).get(StringTools.addColor(d)));
+                    try{
+                        dropConfiguration.save(f);
+                    }catch (IOException ex){
+                        ex.printStackTrace();
+                    }
+                }
             }
         }
     }
