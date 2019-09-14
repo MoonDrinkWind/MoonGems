@@ -1,0 +1,6 @@
+name: MoonEGems
+main: moon.atbar.egems.EGems
+version: 1.0.0
+author: [AtBar, MoonDrinkWind]
+commands:
+  MGems:

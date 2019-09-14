@@ -1,0 +1,12 @@
+'&f一级锋利宝石':
+  Enchant: 'DAMAGE_ALL'
+  level: 1
+  Successrate: 50
+  Malleable:
+    - 276
+'&f二级锋利宝石':
+  Enchant: 'DAMAGE_ALL'
+  level: 2
+  Successrate: 60
+  Malleable:
+    - 276
