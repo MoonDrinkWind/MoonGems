@@ -2,10 +2,10 @@
 ## 明月宝石——全新附魔宝石
 支持版本:1.9 - 1.12.2  
 基于Paper开发  
-[Download]("https://github.com/MoonDrinkWind/MoonGems/releases")
+[Download](https://github.com/MoonDrinkWind/MoonGems/releases)
 ## 食用方法
 提示:  
-英文ID可在 [ID List]("https://minecraft-ids.grahamedgecombe.com") 查询
+英文ID可在 [ID List](https://minecraft-ids.grahamedgecombe.com) 查询
 #### 玩家使用方法
 玩家下蹲状态右键铁砧打开附魔GUI界面  
 ![GUI界面](https://i.loli.net/2019/09/15/G8OLnBouJ1ywmt7.png)  
@@ -15,7 +15,7 @@
 即可附魔（有概率）
 #### 服主配置方法
 ##### config.yml
-附魔英文ID可在 [附魔 WIKI]("https://minecraft-zh.gamepedia.com/%E9%99%84%E9%AD%94") 中查询
+附魔英文ID可在 [附魔 WIKI](https://minecraft-zh.gamepedia.com/%E9%99%84%E9%AD%94) 中查询
 ```
 '&f一级锋利宝石': # 附魔石名称
   Enchant: 'DAMAGE_ALL' # 附魔石所带附魔 
@@ -40,7 +40,7 @@
 ##### drop.yml
 生物随机掉落一种附魔石
 生物ID: 掉落附魔石概率(填0则百分之零 填50则百分之五十 填100则百分之百 以此类推 最大为100)  
-生物ID可在 [生物ID WIKI]("https://minecraft-zh.gamepedia.com/Java版数据值/扁平化前/实体ID") 中查询  
+生物ID可在 [生物ID WIKI](https://minecraft-zh.gamepedia.com/Java版数据值/扁平化前/实体ID) 中查询  
 建议删除初始内容根据自己需要调整
 ```
 ELDER_GUARDIAN: 0 
