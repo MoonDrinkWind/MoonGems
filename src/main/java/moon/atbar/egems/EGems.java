@@ -1,5 +1,7 @@
 package moon.atbar.egems;
 
+import moon.atbar.egems.commands.MGems;
+import moon.atbar.egems.listener.ELis;
 import moon.atbar.egems.utils.DataLoader;
 import moon.atbar.egems.utils.GemTools;
 import moon.atbar.egems.utils.StringTools;
@@ -11,7 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EGems extends JavaPlugin {
     public static EGems instance;
@@ -29,10 +32,14 @@ public class EGems extends JavaPlugin {
         this.reloadConfig();
         for (String d : getConfig().getKeys(false)) {
             GemConfig gemConfig = new GemConfig();
-            gemConfig.setCan(getConfig().getIntegerList(d + ".Malleable"));
+            List<Material> items = new ArrayList<>();
+            for(String item: getConfig().getStringList(d + ".Malleable")){
+                items.add(Material.getMaterial(item));
+            }
+            gemConfig.setCanForgeItem(items);
             gemConfig.setEnchant(getConfig().getString(d + ".Enchant"));
             gemConfig.setLevel(getConfig().getInt(d + ".level"));
-            gemConfig.setSuccessrate(getConfig().getInt(d + ".Successrate"));
+            gemConfig.setSuccessRate(getConfig().getInt(d + ".SuccessRate"));
             GemTools.gemConfig.put(StringTools.addColor(d), gemConfig);
             GemTools.addList(StringTools.addColor(d));
         }
@@ -41,17 +48,13 @@ public class EGems extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Bukkit.getPluginCommand("MGems").setExecutor(new MGems());
         load();
         getLogger().info(DataLoader.messageConfiguration.getString("mm"));
         getLogger().info(StringTools.addColor("&f&l成功加载"));
         Bukkit.getServer().getPluginManager().registerEvents(new ELis(),this);
     }
 
-
-
-    public boolean isr(Integer i) {
-        return new Random().nextInt(100) < i;
-    }
 
     public static void openGui(Player p){
         gui = Bukkit.createInventory(null,27,StringTools.addColor(DataLoader.messageConfiguration.getString("界面标题")));

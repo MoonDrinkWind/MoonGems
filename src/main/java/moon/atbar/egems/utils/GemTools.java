@@ -42,4 +42,8 @@ public class GemTools {
             GemTools.gemList.add(gc);
         }
     }
+
+    public static boolean isSuccess(int i){
+            return new Random().nextInt(100) <= i;
+    }
 }

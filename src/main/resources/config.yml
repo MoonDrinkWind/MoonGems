@@ -1,12 +1,12 @@
 '&f一级锋利宝石':
   Enchant: 'DAMAGE_ALL'
   level: 1
-  Successrate: 50
+  SuccessRate: 50
   Malleable:
-    - 276
+    - COAL
 '&f二级锋利宝石':
   Enchant: 'DAMAGE_ALL'
   level: 2
-  Successrate: 60
+  SuccessRate: 60
   Malleable:
-    - 276
+    - COAL

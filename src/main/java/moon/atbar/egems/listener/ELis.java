@@ -1,5 +1,7 @@
-package moon.atbar.egems;
+package moon.atbar.egems.listener;
 
+import moon.atbar.egems.EGems;
+import moon.atbar.egems.GemConfig;
 import moon.atbar.egems.utils.DataLoader;
 import moon.atbar.egems.utils.GemTools;
 import moon.atbar.egems.utils.StringTools;
@@ -35,7 +37,7 @@ public class ELis implements Listener {
         Location location = entity.getLocation();
         ItemStack gem = GemTools.spawnGem();
         ItemMeta itemMeta = gem.getItemMeta();
-        if(EGems.getInstance().isr(GemTools.drop.get(entityType.name()).get(StringTools.addColor(itemMeta.getDisplayName())))) {
+        if(GemTools.isSuccess(GemTools.drop.get(entityType.name()).get(StringTools.addColor(itemMeta.getDisplayName())))) {
             location.getWorld().dropItemNaturally(location, gem);
         }
     }
@@ -70,7 +72,7 @@ public class ELis implements Listener {
                 ItemMeta item_12_meta = item_12.getItemMeta();
                 if(event.getSlot() == 13) {
                     if(!(item_11_meta.hasEnchants()) && item_12.getTypeId() == 263 && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCanForgeItem().contains(item_11.getTypeId())){
-                        if(EGems.getInstance().isr(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessRate())) {
+                        if(GemTools.isSuccess(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessRate())) {
                             for (Enchantment enchantment : item_12.getEnchantments().keySet()) {
                                 item_11.addUnsafeEnchantment(enchantment, item_12.getEnchantments().get(enchantment));
                             }

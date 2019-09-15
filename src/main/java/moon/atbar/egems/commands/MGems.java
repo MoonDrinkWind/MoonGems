@@ -58,10 +58,10 @@ public class MGems implements CommandExecutor {
                 ItemMeta km = k.getItemMeta();
                 km.setDisplayName(StringTools.addColor(args[3]));
                 k.setItemMeta(km);
-                String gg = GemTools.gemConfig.get(StringTools.addColor(km.getDisplayName())).getEnchant();
-                Integer l = GemTools.gemConfig.get(StringTools.addColor(km.getDisplayName())).getLevel();
+                Enchantment gg = GemTools.gemConfig.get(StringTools.addColor(km.getDisplayName())).getEnchant();
+                int level = GemTools.gemConfig.get(StringTools.addColor(km.getDisplayName())).getLevel();
                 k.setAmount(Integer.parseInt(args[2]));
-                k.addUnsafeEnchantment(Enchantment.getByName(gg),l);
+                k.addUnsafeEnchantment(gg,level);
                 a.getInventory().addItem(k);
                 sender.sendMessage(StringTools.addColor("&7成功给予"));
                 a.sendMessage(StringTools.addColor("&7你收到 &f" + args[2] + " &7个 " + args[3]));
