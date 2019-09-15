@@ -26,6 +26,10 @@ public class EGems extends JavaPlugin {
         return instance;
     }
 
+    public EGems(){
+        instance = this;
+    }
+
     public void load() {
         instance = this;
         this.saveDefaultConfig();
@@ -50,7 +54,8 @@ public class EGems extends JavaPlugin {
     public void onEnable() {
         Bukkit.getPluginCommand("MGems").setExecutor(new MGems());
         load();
-        getLogger().info(DataLoader.messageConfiguration.getString("mm"));
+        DataLoader.loadDrop();
+        DataLoader.loadMessage();
         getLogger().info(StringTools.addColor("&f&l成功加载"));
         Bukkit.getServer().getPluginManager().registerEvents(new ELis(),this);
     }

@@ -71,7 +71,7 @@ public class ELis implements Listener {
                 ItemStack item_12 = event.getInventory().getItem(12);
                 ItemMeta item_12_meta = item_12.getItemMeta();
                 if(event.getSlot() == 13) {
-                    if(!(item_11_meta.hasEnchants()) && item_12.getTypeId() == 263 && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCanForgeItem().contains(item_11.getTypeId())){
+                    if(!(item_11_meta.hasEnchants()) && item_12.getType() == Material.COAL && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCanForgeItem().contains(item_11.getType())){
                         if(GemTools.isSuccess(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessRate())) {
                             for (Enchantment enchantment : item_12.getEnchantments().keySet()) {
                                 item_11.addUnsafeEnchantment(enchantment, item_12.getEnchantments().get(enchantment));
@@ -99,11 +99,13 @@ public class ELis implements Listener {
         if(event.getInventory().getTitle().equalsIgnoreCase(StringTools.addColor(StringTools.addColor(DataLoader.messageConfiguration.getString("界面标题"))))) {
             if(event.getInventory().getItem(11) != null){
                 event.getPlayer().getInventory().addItem(event.getInventory().getItem(11));
-            } else if(event.getInventory().getItem(12) != null) {
+            }
+            if(event.getInventory().getItem(12) != null) {
                 event.getPlayer().getInventory().addItem(event.getInventory().getItem(12));
-            } else if(event.getInventory().getItem(11) != null && event.getInventory().getItem(12) != null) {
-                event.getPlayer().getInventory().addItem(event.getInventory().getItem(11));
-                event.getPlayer().getInventory().addItem(event.getInventory().getItem(12));
+            }
+
+            if(event.getInventory().getItem(14) != null){
+                event.getPlayer().getInventory().addItem(event.getInventory().getItem(14));
             }
         }
     }

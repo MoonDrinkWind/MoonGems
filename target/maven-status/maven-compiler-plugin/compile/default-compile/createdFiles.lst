@@ -1,3 +1,7 @@
-moon\atbar\egems\ELis.class
-moon\atbar\egems\GemsConfig.class
+moon\atbar\egems\utils\DataLoader.class
+moon\atbar\egems\utils\StringTools.class
+moon\atbar\egems\commands\MGems.class
 moon\atbar\egems\EGems.class
+moon\atbar\egems\GemConfig.class
+moon\atbar\egems\utils\GemTools.class
+moon\atbar\egems\listener\ELis.class
