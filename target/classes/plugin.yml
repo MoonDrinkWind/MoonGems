@@ -1,11 +1,8 @@
 name: MoonEGems
 main: moon.atbar.egems.EGems
-version: 1.1.0
+version: 1.1.1
 author: [AtBar, MoonDrinkWind]
 prefix: 明月宝石
 commands:
   MGems:
-    usage: "§a/mgems gui &7- &e打开锻造Gui\n
-    §b/mgems gemlist &7- &e列出宝石列表\n
-    §c/mgems add <p> <a> <g> &7- &e给予宝石\n
-    §d/mgems reload &7- &e重载配置"
+    usage: "§a/mgems gui &7- &e打开锻造Gui\n§b/mgems gemlist &7- &e列出宝石列表\n§c/mgems add <p> <a> <g> &7- &e给予宝石\n§d/mgems reload &7- &e重载配置"

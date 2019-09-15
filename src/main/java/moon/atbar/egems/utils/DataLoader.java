@@ -19,6 +19,7 @@ public class DataLoader {
 
     public static void loadDrop(){
         File f = new File(plugin.getDataFolder(),"drop.yml");
+        HashMap<EntityType,Integer> h = new HashMap<>();
         if (!f.exists()) {
             try {
                 f.createNewFile();
@@ -26,24 +27,23 @@ public class DataLoader {
             catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        dropConfiguration = YamlConfiguration.loadConfiguration(f);
-        HashMap<String,Integer> h = new HashMap<>();
-        Label_E :
-        for (EntityType entityType : EntityType.values()) {
-            if(entityType.isAlive()) {
-                Label_G :
-                for (String d : plugin.getConfig().getKeys(false)) {
-                    String path = entityType.name() + "." + StringTools.addColor(d);
-                    h.put(StringTools.addColor(d) , dropConfiguration.getInt(path));
-                    GemTools.drop.put(entityType.name(), h);
-                    dropConfiguration.set(path, GemTools.drop.get(entityType.name()).get(StringTools.addColor(d)));
+            dropConfiguration = YamlConfiguration.loadConfiguration(f);
+            for (EntityType entityType : EntityType.values()) {
+                if(entityType.isAlive()) {
+                    h.put(entityType, 0);
+                    dropConfiguration.set(entityType.toString(), 0);
                     try{
                         dropConfiguration.save(f);
                     }catch (IOException ex){
                         ex.printStackTrace();
                     }
                 }
+
+            }
+        }else{
+            dropConfiguration = YamlConfiguration.loadConfiguration(f);
+            for (String entityType : dropConfiguration.getKeys(false)) {
+                GemTools.drop.put(EntityType.valueOf(entityType), dropConfiguration.getInt(entityType));
             }
         }
     }

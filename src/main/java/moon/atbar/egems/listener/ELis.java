@@ -37,8 +37,11 @@ public class ELis implements Listener {
         Location location = entity.getLocation();
         ItemStack gem = GemTools.spawnGem();
         ItemMeta itemMeta = gem.getItemMeta();
-        if(GemTools.isSuccess(GemTools.drop.get(entityType.name()).get(StringTools.addColor(itemMeta.getDisplayName())))) {
-            location.getWorld().dropItemNaturally(location, gem);
+        if(GemTools.drop.containsKey(entityType)){
+            System.out.println(DataLoader.dropConfiguration.get(entityType.toString()));
+            if(GemTools.isSuccess(DataLoader.dropConfiguration.getInt(entityType.toString()))){
+                location.getWorld().dropItemNaturally(location, gem);
+            }
         }
     }
 
