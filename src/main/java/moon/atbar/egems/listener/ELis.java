@@ -71,10 +71,18 @@ public class ELis implements Listener {
                 ItemStack item_12 = event.getInventory().getItem(12);
                 ItemMeta item_12_meta = item_12.getItemMeta();
                 if(event.getSlot() == 13) {
-                    if(!(item_11_meta.hasEnchants()) && item_12.getType() == Material.COAL && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCanForgeItem().contains(item_11.getType())){
+                    if(item_12.getType() == Material.COAL && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCanForgeItem().contains(item_11.getType())){
                         if(GemTools.isSuccess(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessRate())) {
                             for (Enchantment enchantment : item_12.getEnchantments().keySet()) {
-                                item_11.addUnsafeEnchantment(enchantment, item_12.getEnchantments().get(enchantment));
+                                if(item_11.getEnchantments().containsKey(enchantment)){
+                                    if(item_11.getEnchantmentLevel(enchantment) + item_12.getEnchantmentLevel(enchantment) >= enchantment.getMaxLevel()){
+                                        item_11.addUnsafeEnchantment(enchantment, enchantment.getMaxLevel());
+                                    }else{
+                                        item_11.addUnsafeEnchantment(enchantment, item_11.getEnchantmentLevel(enchantment) + item_12.getEnchantmentLevel(enchantment));
+                                    }
+                                }else{
+                                    item_11.addUnsafeEnchantment(enchantment, item_12.getEnchantments().get(enchantment));
+                                }
                             }
                             event.getInventory().setItem(14,item_11);
                             if(item_12.getAmount() > 0) {
@@ -83,6 +91,9 @@ public class ELis implements Listener {
                             event.getInventory().getItem(11).setAmount(0);
                             event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("成功镶嵌")));
                         } else {
+                            if(item_12.getAmount() > 0) {
+                                item_12.setAmount(item_12.getAmount() - 1);
+                            }
                             event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("失败镶嵌")));
                         }
                     } else {
