@@ -69,8 +69,8 @@ public class ELis implements Listener {
                 ItemStack item_12 = event.getInventory().getItem(12);
                 ItemMeta item_12_meta = item_12.getItemMeta();
                 if(event.getSlot() == 13) {
-                    if(!(item_11_meta.hasEnchants()) && item_12.getTypeId() == 263 && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCan().contains(item_11.getTypeId())){
-                        if(EGems.getInstance().isr(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessrate())) {
+                    if(!(item_11_meta.hasEnchants()) && item_12.getTypeId() == 263 && item_12.getItemMeta().hasEnchants() && item_12.getItemMeta().hasDisplayName() && GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getCanForgeItem().contains(item_11.getTypeId())){
+                        if(EGems.getInstance().isr(GemTools.gemConfig.get(StringTools.addColor(item_12_meta.getDisplayName())).getSuccessRate())) {
                             for (Enchantment enchantment : item_12.getEnchantments().keySet()) {
                                 item_11.addUnsafeEnchantment(enchantment, item_12.getEnchantments().get(enchantment));
                             }

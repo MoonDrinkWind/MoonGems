@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Author MoonDrinkWind
+ * Description Handle Gems
+ * */
 public class GemTools {
     public static HashMap<String, GemConfig> gemConfig = new HashMap<>();
     public static HashMap<String,HashMap<String,Integer>> drop = new HashMap<>();
@@ -23,13 +27,13 @@ public class GemTools {
         itemMeta.setDisplayName(k);
         ArrayList<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add(StringTools.addColor("&e成功率 : &f" + gemConfig.get(k).getSuccessrate()));
+        lore.add(StringTools.addColor("&e成功率 : &f" + gemConfig.get(k).getSuccessRate()));
         lore.add("");
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
-        String e = gemConfig.get(StringTools.addColor(itemMeta.getDisplayName())).getEnchant();
-        Integer l = gemConfig.get(StringTools.addColor(itemMeta.getDisplayName())).getLevel();
-        item.addUnsafeEnchantment(Enchantment.getByName(e),l);
+        Enchantment enchantment = gemConfig.get(StringTools.addColor(itemMeta.getDisplayName())).getEnchant();
+        int level = gemConfig.get(StringTools.addColor(itemMeta.getDisplayName())).getLevel();
+        item.addUnsafeEnchantment(enchantment, level);
         return item;
     }
 
