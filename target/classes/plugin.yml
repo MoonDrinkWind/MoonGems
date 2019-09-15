@@ -1,6 +1,6 @@
 name: MoonEGems
 main: moon.atbar.egems.EGems
-version: 1.1.1
+version: 1.1.2
 author: [AtBar, MoonDrinkWind]
 prefix: 明月宝石
 commands:

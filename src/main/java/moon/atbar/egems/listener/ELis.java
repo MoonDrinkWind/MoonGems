@@ -92,12 +92,12 @@ public class ELis implements Listener {
                                 item_12.setAmount(item_12.getAmount() - 1);
                             }
                             event.getInventory().getItem(11).setAmount(0);
-                            event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("成功镶嵌")));
+                            event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("成功附魔")));
                         } else {
                             if(item_12.getAmount() > 0) {
                                 item_12.setAmount(item_12.getAmount() - 1);
                             }
-                            event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("失败镶嵌")));
+                            event.getWhoClicked().sendMessage(StringTools.addColor(DataLoader.messageConfiguration.getString("失败附魔")));
                         }
                     } else {
                         event.getWhoClicked().closeInventory();
