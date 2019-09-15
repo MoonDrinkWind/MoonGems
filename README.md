@@ -8,7 +8,7 @@
 英文ID可在 [ID List]("https://minecraft-ids.grahamedgecombe.com") 查询
 #### 玩家使用方法
 玩家下蹲状态右键铁砧打开附魔GUI界面  
-![GUI界面]("https://sm.ms/image/G8OLnBouJ1ywmt7")  
+![GUI界面]("https://i.loli.net/2019/09/15/G8OLnBouJ1ywmt7.png")  
 左边放上需要附魔的物品  
 右边放上附魔石  
 再点击中间的玻璃  
@@ -95,4 +95,3 @@ PARROT: 0
 VILLAGER: 0
 PLAYER: 0
 ```
-
